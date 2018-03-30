@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -g3 -O0
+CFLAGS = -Wall -g3 -O0 -std=c11
 LDFLAGS =
 LDLIBS = -lgsl -lgslcblas
 

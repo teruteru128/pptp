@@ -25,7 +25,7 @@ int init_gsl()
         if(r == NULL){
             return EXIT_FAILURE;
         }
-        gsl_rng_set(r, 721);
+        gsl_rng_set(r, gsl_rng_default_seed);
     }
     return EXIT_SUCCESS;
 }

@@ -22,7 +22,8 @@ int init_gsl()
     {
         gsl_rng_env_setup();
         r = gsl_rng_alloc(t);
-        if(r == NULL){
+        if (r == NULL)
+        {
             return EXIT_FAILURE;
         }
         gsl_rng_set(r, gsl_rng_default_seed);
@@ -57,7 +58,8 @@ int main(int argc, char **argv)
     int find_flg = 0;
     int ret = EXIT_SUCCESS;
 
-    if(init_gsl()){
+    if (init_gsl())
+    {
         exit(EXIT_FAILURE);
     }
     setlocale(LC_ALL, "ja_JP.UTF-8");
@@ -118,7 +120,7 @@ int main(int argc, char **argv)
 finish:
     if (find_flg)
     {
-        printf("find!(%"PRIu64")\n", set_offset);
+        printf("find!(%" PRIu64 ")\n", set_offset);
     }
 done:
     free(array);

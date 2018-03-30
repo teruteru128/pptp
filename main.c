@@ -8,7 +8,7 @@
 #include <gsl/gsl_rng.h>
 #include <gsl/gsl_randist.h>
 
-#define SIZE_STEP 1048576
+#define SIZE_STEP 1024
 
 #define pptp L"ポプテピピック"
 #define src_pptp L"ポプテピック"
@@ -67,7 +67,6 @@ int main(int argc, char **argv)
         goto done;
     }
     memset(array, 0, sizeof(wchar_t) * array_size);
-    wcsncpy(array, pptp, cmp_length);
 
     /*
     set_offset : 0 1 2 3 4 5 6 7 8 9 10
@@ -93,8 +92,8 @@ int main(int argc, char **argv)
 #ifdef _DEBUG
             printf("realloc...\n");
 #endif /* _DEBUG */
-            tmp_array_size = array_size + SIZE_STEP;
-            tmp_array_ptr = realloc(array, tmp_array_size);
+            tmp_array_size = (array_size + SIZE_STEP);
+            tmp_array_ptr = realloc(array, sizeof(wchar_t) * tmp_array_size);
             if (tmp_array_ptr == NULL)
             {
                 /* realloc fail */
@@ -105,7 +104,7 @@ int main(int argc, char **argv)
                 /* realloc success */
                 array = tmp_array_ptr;
                 array_size = tmp_array_size;
-                memset(&(array[set_offset + 1]), 0, array_size - (set_offset + 1));
+                memset(&(array[set_offset + 1]), 0, sizeof(wchar_t) * (array_size - (set_offset + 1)));
             }
 #ifdef _DEBUG
             printf("realloc Successful\n");

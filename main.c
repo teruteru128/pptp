@@ -55,6 +55,7 @@ int main(int argc, char **argv)
     size_t set_offset = 0;
     size_t cmp_offset = 0;
     int find_flg = 0;
+    int ret = EXIT_SUCCESS;
 
     if(init_gsl()){
         exit(EXIT_FAILURE);
@@ -64,6 +65,7 @@ int main(int argc, char **argv)
     if (array == NULL)
     {
         perror(NULL);
+        ret = EXIT_FAILURE;
         goto done;
     }
     memset(array, 0, sizeof(wchar_t) * array_size);
@@ -97,6 +99,8 @@ int main(int argc, char **argv)
             if (tmp_array_ptr == NULL)
             {
                 /* realloc fail */
+                perror(NULL);
+                ret = EXIT_FAILURE;
                 goto done;
             }
             else
@@ -119,5 +123,5 @@ finish:
 done:
     free(array);
     clean_gsl();
-    return 0;
+    return ret;
 }
